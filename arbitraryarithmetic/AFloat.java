@@ -146,7 +146,7 @@ public class AFloat {
 
         return result;
     }
-    
+
     public AFloat subtract(AFloat other) {
         
         int totalScale;
@@ -186,6 +186,35 @@ public class AFloat {
         result.scale = totalScale;
 
         return result;
+    }
+
+    public AFloat multiply(AFloat other){
+
+        int totalScale = this.scale + other.scale;
+        String mag1 = this.magnitude;
+        String mag2 = other.magnitude;
+        mag1 = mag1.replace(".", "");
+        mag2 = mag2.replace(".", "");
+
+        AInteger a1 = new AInteger(mag1);
+        a1.setSign(this.sign);
+        AInteger a2 = new AInteger(mag2);
+        a2.setSign(other.sign);
+
+        AInteger mulResult = a1.multiply(a2);
+
+        // Convert the result back to AFloat
+        String addResultMag = mulResult.getMagnitude();
+        addResultMag = addDecimalPoint(addResultMag, totalScale);
+
+        AFloat result = new AFloat();
+        result.magnitude = addResultMag;
+        result.sign = mulResult.getSign();
+        result.scale = totalScale;
+
+        return result;
+
+
     }
 
     
