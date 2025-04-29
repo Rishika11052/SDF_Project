@@ -128,13 +128,37 @@ public class AInteger {
 
         }
             
+    }
+    public AInteger subtract(AInteger other){
+        int comparison = compareMagnitudes(this.magnitude, other.magnitude);
+        String diffMagnitude;
+        int diffSign;
+        //Same sign: result wil be subtraction of magnitudes and the its sign will be the sign of the larger number
+        if(this.sign == other.sign){
+            
+            if(comparison == 0){
+                return new AInteger("0");
+            }else if(comparison > 0){
+                diffSign = this.sign;
+                diffMagnitude = subtractMagnitudes(this.magnitude, other.magnitude);
+            }else{
+                diffSign = -this.sign;
+                diffMagnitude = subtractMagnitudes(other.magnitude, this.magnitude);
+            }
+        }else{
+            diffSign = this.sign;
+            diffMagnitude = addMagnitudes(this.magnitude, other.magnitude);                                
         }
 
-        
-        
+        String diffResult;
+        if(diffSign == 1){
+            diffResult = diffMagnitude;
+        }else{
+            diffResult = "-" + diffMagnitude;
+        }
 
-        
-        
+        return new AInteger(diffResult);
+    }
 
     // Helper method to compare magnitudes (returns 1 if this > other, -1 if this < other, 0 if equal)
     private int compareMagnitudes(String mag1, String mag2) {
