@@ -146,6 +146,47 @@ public class AFloat {
 
         return result;
     }
+    
+    public AFloat subtract(AFloat other) {
+        
+        int totalScale;
+        String mag1 = this.magnitude;
+        String mag2 = other.magnitude;
+
+        // Equalize the scale
+        if (this.scale >= other.scale) {
+           
+            totalScale = this.scale;
+            mag2 = padToScale(mag2, other.scale, totalScale);
+        } else {
+            
+            totalScale = other.scale;
+            mag1 = padToScale(mag1, this.scale, totalScale);
+        }
+
+        // Remove the decimal point for now
+        mag1 = mag1.replace(".", "");
+        mag2 = mag2.replace(".", "");
+
+        // Perform the subtraction as integers
+        AInteger a1 = new AInteger(mag1);
+        a1.setSign(this.sign);
+        AInteger a2 = new AInteger(mag2);
+        a2.setSign(other.sign);
+
+        AInteger addResult = a1.subtract(a2);
+
+        // Convert the result back to AFloat
+        String addResultMag = addResult.getMagnitude();
+        addResultMag = addDecimalPoint(addResultMag, totalScale);
+
+        AFloat result = new AFloat();
+        result.magnitude = addResultMag;
+        result.sign = addResult.getSign();
+        result.scale = totalScale;
+
+        return result;
+    }
 
     
     // Add a decimal point to the magnitude string
