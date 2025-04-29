@@ -175,7 +175,7 @@ public class AInteger {
 
     public AInteger divide(AInteger other) {
         if (other.magnitude.equals("0")) {
-           System.out.println("Division by Zero error.");
+           System.out.println("error: Division by Zero");
            System.exit(1);
         }
     

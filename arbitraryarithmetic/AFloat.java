@@ -137,7 +137,7 @@ public class AFloat {
 
         // Convert the result back to AFloat
         String addResultMag = addResult.getMagnitude();
-        addResultMag = addDecimalPoint(addResultMag, totalScale);
+       
 
         AFloat result = new AFloat();
         result.magnitude = addResultMag;
@@ -178,7 +178,7 @@ public class AFloat {
 
         // Convert the result back to AFloat
         String addResultMag = addResult.getMagnitude();
-        addResultMag = addDecimalPoint(addResultMag, totalScale);
+        
 
         AFloat result = new AFloat();
         result.magnitude = addResultMag;
@@ -205,7 +205,7 @@ public class AFloat {
 
         // Convert the result back to AFloat
         String addResultMag = mulResult.getMagnitude();
-        addResultMag = addDecimalPoint(addResultMag, totalScale);
+       
 
         AFloat result = new AFloat();
         result.magnitude = addResultMag;
@@ -217,19 +217,52 @@ public class AFloat {
 
     }
 
-    
-    // Add a decimal point to the magnitude string
-    private String addDecimalPoint(String s, int scale) {
-        // If the length of the string is less than or equal to scale, add leading zeros
-        if (s.length() <= scale) {
-            s = "0".repeat(scale - s.length()) + s;
+    public AFloat divide(AFloat other) {
+        //if denominator is 0 , show "Division by zero" and exit
+        if (other.magnitude.equals("0")) {
+            System.out.println("Division by Zero error");
+            System.exit(1);
         }
+    
+        
+        String mag1 = this.magnitude;
+        String mag2 = other.magnitude;
+        //scaleDiff to add the decimal point in the end
+        int scaleDiff = this.scale - other.scale;
+    
+        // pad the numberator with 30 zeroes to handle 30 decimal places
+        String scaledMag1 = padToScale(mag1, 0, 30);
+    
+        // Perform integer division using AInteger
+        AInteger numerator = new AInteger(scaledMag1);
+        AInteger denominator = new AInteger(mag2);
+        AInteger quotient = numerator.divide(denominator);
+    
+        // Convert the result to AFloat
+        AFloat result = new AFloat();
+        result.magnitude = quotient.getMagnitude(); // No decimal yet
+        result.sign = (this.sign == other.sign) ? 1 : -1;
+        result.scale = 30 + scaleDiff;  // Adjust final scale
 
-        // Insert the decimal point at the correct position
-        String integerPart = s.substring(0, s.length() - scale);
-        String fractionalPart = s.substring(s.length() - scale);
 
-        // Combine the parts with the decimal point
-        return integerPart +  fractionalPart;
+        //if numerator is exactly divisible by denominator then no need for 30 digits after decimal
+        while (result.scale >0 && result.magnitude.endsWith("0")) {
+            result.magnitude = result.magnitude.substring(0, result.magnitude.length() - 1);
+            result.scale-- ;
+        }
+    
+        // Truncate the magnitude to 30 decimal places
+        if (result.scale > 30) {
+            int excess = result.scale - 30;
+            result.magnitude = result.magnitude.substring(0, result.magnitude.length() - excess);
+            result.scale = 30;
+        }
+        
+        return result;
     }
+    
+    
+
+    
+    
 }
