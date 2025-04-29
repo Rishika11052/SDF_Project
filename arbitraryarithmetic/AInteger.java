@@ -160,6 +160,19 @@ public class AInteger {
         return new AInteger(diffResult);
     }
 
+    public AInteger multiply(AInteger other){
+        String mulMagnitude = multiplyMagnitudes(this.magnitude, other.magnitude);
+        String mulResult;
+
+        if(this.sign == other.sign){
+            mulResult = mulMagnitude;
+        }else{
+            mulResult = "-" + mulMagnitude;
+        }
+        
+        return new AInteger(mulResult);
+    }
+
     // Helper method to compare magnitudes (returns 1 if this > other, -1 if this < other, 0 if equal)
     private int compareMagnitudes(String mag1, String mag2) {
         if (mag1.length() > mag2.length()) {
@@ -255,6 +268,34 @@ public class AInteger {
         // Remove leading zeros
         String result = sb.reverse().toString();
         return removeLeadingZeros(result);
+    }
+    private String multiplyMagnitudes(String mag1, String mag2){
+        int len1 = mag1.length();
+        int len2 = mag2.length();
+        int[] mul = new int[len1 + len2];
+
+        for (int i = len1 -1 ; i>=0 ; i--){
+            int digit1 = mag1.charAt(i) - '0';
+            for (int j=len2 -1 ; j>=0;j--){
+                int digit2 = mag2.charAt(j) - '0';
+
+                int product = digit1*digit2;
+                int pos2 = i + j +1;
+                int pos1 = i+j;
+
+                int sum = product + mul[pos2];
+
+                mul[pos2] = sum%10;
+                mul[pos1] += sum / 10;
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int digit : mul) {
+            if(!(sb.length() == 0 && digit == 0)){
+                sb.append(digit);
+            }
+        }
+        return sb.length() == 0 ? "0" : sb.toString();
     }
 
    
