@@ -173,6 +173,27 @@ public class AInteger {
         return new AInteger(mulResult);
     }
 
+    public AInteger divide(AInteger other) {
+        if (other.magnitude.equals("0")) {
+           System.out.println("Division by Zero error.");
+           System.exit(1);
+        }
+    
+        String quotientMagnitude = divideMagnitudes(this.magnitude, other.magnitude);
+        
+        int resultSign = (this.sign == other.sign) ? 1 : -1;
+    
+        // If quotient is zero, set sign to positive
+        if (quotientMagnitude.equals("0")) {
+            resultSign = 1;
+        }
+    
+        AInteger result = new AInteger();
+        result.magnitude = quotientMagnitude;
+        result.sign = resultSign;
+        return result;
+    }
+
     // Helper method to compare magnitudes (returns 1 if this > other, -1 if this < other, 0 if equal)
     private int compareMagnitudes(String mag1, String mag2) {
         if (mag1.length() > mag2.length()) {
@@ -296,6 +317,26 @@ public class AInteger {
             }
         }
         return sb.length() == 0 ? "0" : sb.toString();
+    }
+
+    private String divideMagnitudes(String dividend, String divisor) {
+        StringBuilder result = new StringBuilder();
+        StringBuilder current = new StringBuilder();
+    
+        for (int i = 0; i < dividend.length(); i++) {
+            current.append(dividend.charAt(i));
+            current = new StringBuilder(removeLeadingZeros(current.toString()));
+    
+            int quotientDigit = 0;
+            while (compareMagnitudes(current.toString(), divisor) >= 0) {
+                current = new StringBuilder(subtractMagnitudes(current.toString(), divisor));
+                quotientDigit++;
+            }
+    
+            result.append((char) (quotientDigit + '0'));
+        }
+    
+        return removeLeadingZeros(result.toString());
     }
 
    
