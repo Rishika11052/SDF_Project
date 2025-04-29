@@ -14,8 +14,14 @@ public class AFloat {
 
     // Constructor that takes string input
     public AFloat(String s) {
+        // s== null checks if it hasn't been initialized meaning it's not referring to a real object in memory 
+        //s.isEmpty() checks if string is empty meaning a string exists but its initialized to ""
         if (s == null || s.isEmpty()) {
             throw new IllegalArgumentException("Input string is null or empty.");
+        }
+        //if the input given is "a123.456" then it'll show invalid format error
+        if (!s.matches("[+-]?\\d*(\\.\\d*)?")) {
+            throw new IllegalArgumentException("Invalid float format: " + s);
         }
 
         // If the number starts with '-' then initialize sign to -1

@@ -17,6 +17,11 @@ public class AInteger {
         if (s == null || s.isEmpty()) {
             throw new IllegalArgumentException("Input string is null or empty.");
         }
+        //if input is anything other than digits from 0-9 it'll show this error
+        if (!s.matches("[+-]?\\d+")) {
+            throw new IllegalArgumentException("Invalid integer format: " + s);
+        }
+        
         
         //if number starts with '-' then initialize sign to -1 and get the magnitude of the number 
         if (s.charAt(0) == '-') {
@@ -239,9 +244,6 @@ public class AInteger {
             // Update carry for next iteration
             carry = total / 10;
         }
-         
-        
-
         
         return sum.reverse().toString();
     }
