@@ -1,4 +1,4 @@
-package src.main.java.arbitraryarithmetic;
+package arbitraryarithmetic;
 
 public class AInteger {
     private String magnitude; // stores absolute value as string

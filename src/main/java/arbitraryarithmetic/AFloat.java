@@ -1,4 +1,4 @@
-package src.main.java.arbitraryarithmetic;
+package arbitraryarithmetic;
 
 public class AFloat {
     private String magnitude; // Stores the absolute value of the float as a string (without the decimal point)
