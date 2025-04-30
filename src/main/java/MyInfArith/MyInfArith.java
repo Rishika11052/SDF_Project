@@ -1,6 +1,6 @@
 package MyInfArith;
-import src.main.java.arbitraryarithmetic.AInteger;
-import src.main.java.arbitraryarithmetic.AFloat;
+import arbitraryarithmetic.AInteger;
+import arbitraryarithmetic.AFloat;
 
 public class MyInfArith {
     public static void main(String[] args) {
