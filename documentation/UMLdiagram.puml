@@ -1,0 +1,53 @@
+@startuml ArbitraryPrecisionArithmetic
+
+' Enable arrows and hide circle markers
+skinparam class {
+    ArrowColor #000000
+    ArrowFontSize 12
+    BackgroundColor #FFFFFF
+    BorderColor #000000
+}
+
+' Define classes
+class AInteger {
+  - value: String
+  - isNegative: boolean
+  --
+  + add(other: AInteger): AInteger
+  + subtract(other: AInteger): AInteger
+  + multiply(other: AInteger): AInteger
+  + divide(other: AInteger): AInteger
+  + toString(): String
+}
+
+class AFloat {
+  - integerPart: String
+  - fractionalPart: String
+  - isNegative: boolean
+  --
+  + add(other: AFloat): AFloat
+  + subtract(other: AFloat): AFloat
+  + multiply(other: AFloat): AFloat
+  + divide(other: AFloat): AFloat
+  + toString(): String
+}
+
+class MyInfArith {
+  - args: String[]
+  --
+  + main(args: String[]): void
+  + parseInput(input: String): void
+  + displayResult(result: String): void
+}
+
+' Define relationships
+AInteger <|-- AFloat : Inheritance (optional)
+MyInfArith --> AInteger : Uses
+MyInfArith --> AFloat : Uses
+
+' Add notes if needed
+note top of AInteger: Handles arbitrary-precision\ninteger arithmetic
+note top of AFloat: Handles arbitrary-precision\nfloating-point arithmetic
+note bottom of MyInfArith: CLI entry point
+
+@enduml

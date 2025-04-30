@@ -180,8 +180,7 @@ public class AInteger {
 
     public AInteger divide(AInteger other) {
         if (other.magnitude.equals("0")) {
-           System.out.println("error: Division by Zero");
-           System.exit(1);
+           throw new ArithmeticException("Division by zero error.");
         }
     
         String quotientMagnitude = divideMagnitudes(this.magnitude, other.magnitude);

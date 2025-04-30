@@ -237,8 +237,7 @@ public class AFloat {
     public AFloat divide(AFloat other) {
         //if denominator is 0 , show "Division by zero" and exit
         if (other.magnitude.equals("0")) {
-            System.out.println("Division by Zero error");
-            System.exit(1);
+            throw new ArithmeticException("Division by Zero.");
         }
     
         

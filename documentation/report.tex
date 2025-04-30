@@ -1,0 +1,109 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{geometry}
+
+% Set page margins
+\geometry{top=1in, bottom=1in, left=1in, right=1in}
+
+\title{Software Development Fundamentals Project (CS1023)\\
+       Arbitrary-Precision Arithmetic Library in Java}
+\author{Your Name}
+\date{January-May 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction}
+The goal of this project is to implement an arbitrary-precision arithmetic library in Java, supporting both integer and floating-point arithmetic. The project will demonstrate fundamental principles of software development, including object-oriented design, algorithmic efficiency, and handling of large numbers beyond the capabilities of standard data types.
+
+\section*{Project Overview}
+This document provides a detailed description of the implementation process for the arbitrary-precision arithmetic library. The library includes two major classes:
+\begin{itemize}
+    \item \textbf{AInteger}: A class for arbitrary-precision integer arithmetic.
+    \item \textbf{AFloat}: A class for arbitrary-precision floating-point arithmetic.
+\end{itemize}
+
+\section*{Class Design}
+\subsection*{AInteger Class}
+The \textbf{AInteger} class is designed to handle integers of arbitrary size. The primary functionalities include:
+\begin{itemize}
+    \item Constructors to initialize the integer from a string representation.
+    \item Methods for basic arithmetic operations such as addition, subtraction, and multiplication.
+    \item Helper methods to compare, check magnitude, and manage sign.
+\end{itemize}
+
+\subsubsection*{Example Code for AInteger Class}
+\begin{verbatim}
+public class AInteger {
+    private String value;
+    
+    // Constructor
+    public AInteger(String value) {
+        this.value = value;
+    }
+    
+    // Method for addition
+    public AInteger add(AInteger other) {
+        // Implementation here
+    }
+}
+\end{verbatim}
+
+\subsection*{AFloat Class}
+The \textbf{AFloat} class extends the functionality of \textbf{AInteger} by including support for floating-point numbers. It uses a string representation to manage both the magnitude and scale of the number.
+\begin{itemize}
+    \item Constructors to initialize the floating-point number.
+    \item Methods for addition, subtraction, multiplication, and division.
+    \item Scale management to handle floating-point precision.
+\end{itemize}
+
+\subsubsection*{Example Code for AFloat Class}
+\begin{verbatim}
+public class AFloat {
+    private AInteger mantissa;
+    private int scale;
+    
+    // Constructor
+    public AFloat(String value) {
+        // Parse value into mantissa and scale
+    }
+    
+    // Method for addition
+    public AFloat add(AFloat other) {
+        // Implementation here
+    }
+}
+\end{verbatim}
+
+\section*{Methodology}
+The project uses string-based representation for large numbers. The arithmetic operations are carried out using these string representations, which allows for arbitrary precision. For operations like addition and subtraction, the numbers are treated digit-by-digit, handling carries and borrows as needed.
+
+\subsection*{Addition Algorithm}
+The addition algorithm works by aligning the digits of two numbers, starting from the least significant digit (rightmost), and performing the addition. If the result exceeds the base (10 for decimal), a carry is generated and propagated to the next digit.
+
+\subsection*{Multiplication Algorithm}
+Multiplication is implemented using a digit-by-digit approach, where each digit of one number is multiplied by each digit of the other. The results are summed, ensuring the correct placement of carries.
+
+\section*{Testing and Validation}
+The library has been tested with a variety of test cases, including edge cases like adding or subtracting very large numbers, performing operations on floating-point numbers with high precision, and handling negative numbers.
+
+\subsection*{Example Test Case}
+For the input:
+\[
+AInteger: 123456789012345678901234567890
+\]
+and
+\[
+AInteger: 987654321098765432109876543210
+\]
+The expected output for addition would be:
+\[
+AInteger: 1111111110111111111011111111100
+\]
+
+\section*{Conclusion}
+The arbitrary-precision arithmetic library successfully handles integer and floating-point operations beyond the limits of standard data types. This project demonstrates the implementation of basic algorithms for managing large numbers and provides a robust foundation for handling high-precision arithmetic in Java.
+
+\end{document}
