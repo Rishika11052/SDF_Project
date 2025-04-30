@@ -1,4 +1,4 @@
-package arbitraryarithmetic;
+package src.main.java.arbitraryarithmetic;
 
 public class AFloat {
     private String magnitude; // Stores the absolute value of the float as a string (without the decimal point)
@@ -149,6 +149,17 @@ public class AFloat {
         result.magnitude = addResultMag;
         result.sign = addResult.getSign();
         result.scale = totalScale;
+
+        if (result.scale > 30) {
+            // Truncate the magnitude to 30 decimal places
+            int excess = result.scale - 30;
+            result.magnitude = result.magnitude.substring(0, result.magnitude.length() - excess);
+            result.scale = 30;
+        }
+        while (result.scale >0 && result.magnitude.endsWith("0")) {
+            result.magnitude = result.magnitude.substring(0, result.magnitude.length() - 1);
+            result.scale-- ;
+        }
 
         return result;
     }
