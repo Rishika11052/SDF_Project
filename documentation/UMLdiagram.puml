@@ -1,53 +1,59 @@
-@startuml ArbitraryPrecisionArithmetic
+@startuml
+title Arbitrary Precision Arithmetic Library - UML Class Diagram
+' Author: Aric Maji and Team
 
-' Enable arrows and hide circle markers
-skinparam class {
-    ArrowColor #000000
-    ArrowFontSize 12
-    BackgroundColor #FFFFFF
-    BorderColor #000000
+package arbitraryarithmetic {
+
+    class AInteger {
+        - int sign
+        - String magnitude
+
+        + AInteger()
+        + AInteger(String value)
+        + AInteger(AInteger integer)
+        + static AInteger parse(String value)
+        + AInteger add(AInteger other)
+        + AInteger subtract(AInteger other)
+        + AInteger multiply(AInteger other)
+        + AInteger divide(AInteger other)
+        + String toString()
+        --
+        # String removeLeadingZeros(String magnitude)
+        # static int compareMagnitudes(String a, String b)
+        # String addMagnitudes(String a, String b)
+        # String subtractMagnitudes(String a, String b)
+        # String multiplyMagnitudes(String a, String b)
+        # String divideMagnitudes(String a, String b)
+    }
+
+    class AFloat {
+        - int sign
+        - String Value
+        - int scale
+
+        + AFloat()
+        + AFloat(String value)
+        + AFloat(AFloat other)
+        + static AFloat parse(String value)
+        + AFloat add(AFloat other)
+        + AFloat subtract(AFloat other)
+        + AFloat multiply(AFloat other)
+        + AFloat divide(AFloat other)
+        + String toString()
+        --
+        # String padToScale(String a, int currentScale, int targetScale)
+    }
+
+    AFloat ..> AInteger : uses
 }
 
-' Define classes
-class AInteger {
-  - value: String
-  - isNegative: boolean
-  --
-  + add(other: AInteger): AInteger
-  + subtract(other: AInteger): AInteger
-  + multiply(other: AInteger): AInteger
-  + divide(other: AInteger): AInteger
-  + toString(): String
+package MyInfArith {
+
+    class MyInfArith {
+        + static void main(String[] args)
+    }
+
+    MyInfArith ..> arbitraryarithmetic.AInteger : uses
+    MyInfArith ..> arbitraryarithmetic.AFloat : uses
 }
-
-class AFloat {
-  - integerPart: String
-  - fractionalPart: String
-  - isNegative: boolean
-  --
-  + add(other: AFloat): AFloat
-  + subtract(other: AFloat): AFloat
-  + multiply(other: AFloat): AFloat
-  + divide(other: AFloat): AFloat
-  + toString(): String
-}
-
-class MyInfArith {
-  - args: String[]
-  --
-  + main(args: String[]): void
-  + parseInput(input: String): void
-  + displayResult(result: String): void
-}
-
-' Define relationships
-AInteger <|-- AFloat : Inheritance (optional)
-MyInfArith --> AInteger : Uses
-MyInfArith --> AFloat : Uses
-
-' Add notes if needed
-note top of AInteger: Handles arbitrary-precision\ninteger arithmetic
-note top of AFloat: Handles arbitrary-precision\nfloating-point arithmetic
-note bottom of MyInfArith: CLI entry point
-
 @enduml

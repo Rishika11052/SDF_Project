@@ -25,7 +25,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>arbitraryarithmetic.MyInfArith</mainClass>
+                            <mainClass>MyInfArith.MyInfArith</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

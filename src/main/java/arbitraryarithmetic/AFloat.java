@@ -24,6 +24,14 @@ public class AFloat {
             throw new IllegalArgumentException("Invalid float format: " + s);
         }
 
+        if (s.startsWith(".")) {
+            s = "0" + s;
+        } else if (s.startsWith("-.")) {
+            s = "-0" + s.substring(1); // Handle negative decimals
+        } else if (s.startsWith("+.")) {
+            s = "+0" + s.substring(1); // Handle explicit positive decimals
+        }
+
         // If the number starts with '-' then initialize sign to -1
         if (s.charAt(0) == '-') {
             setSign(-1);
