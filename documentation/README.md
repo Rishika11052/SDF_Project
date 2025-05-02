@@ -35,5 +35,5 @@ Clone the Repository
 
 To get a local copy of the project, run the following command in your terminal:
 
-'''bash
+```bash
 git clone https://github.com/Rishika11052/SDF_Project.git
