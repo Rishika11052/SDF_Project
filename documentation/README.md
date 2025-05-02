@@ -37,3 +37,30 @@ To get a local copy of the project, run the following command in your terminal:
 
 ```bash
 git clone https://github.com/Rishika11052/SDF_Project.git
+
+```
+
+To build using Maven
+```bash
+mvn clean install
+
+```
+To run using Maven
+```bash
+mvn exec:java -Dexec.mainClass="MyInfArith.MyInfArith" -Dexec.args="'type' 'operation' num1 num2 "
+```
+type is int or float
+operation is add/sub/mul/div
+
+To run using the python script
+
+First compile
+```bash
+python3 compile_and_run.py compile
+```
+
+Then run:
+```bash
+python3 compile_and_run.py run type operation num1 num2
+```
+
