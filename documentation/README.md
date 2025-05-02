@@ -30,3 +30,9 @@ Prerequisites
     Maven (for building and testing the project)
 
     Git (for cloning the repository)
+
+Clone the Repository
+
+To get a local copy of the project, run the following command in your terminal:
+
+git clone https://github.com/yourusername/arbitrary-precision-arithmetic.git
