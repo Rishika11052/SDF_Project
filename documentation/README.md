@@ -46,7 +46,7 @@ mvn clean install
 
 ```
 To run using Maven
-```bash
+```bashbash
 mvn exec:java -Dexec.mainClass="MyInfArith.MyInfArith" -Dexec.args="'type' 'operation' num1 num2 "
 ```
 type is int or float
