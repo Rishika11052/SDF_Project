@@ -199,16 +199,27 @@ public class AFloat {
         AInteger a2 = new AInteger(mag2);
         a2.setSign(other.sign);
 
-        AInteger addResult = a1.subtract(a2);
+        AInteger subResult = a1.subtract(a2);
 
         // Convert the result back to AFloat
-        String addResultMag = addResult.getMagnitude();
+        String addResultMag = subResult.getMagnitude();
         
 
         AFloat result = new AFloat();
         result.magnitude = addResultMag;
-        result.sign = addResult.getSign();
+        result.sign = subResult.getSign();
         result.scale = totalScale;
+
+        if (result.scale > 30) {
+            // Truncate the magnitude to 30 decimal places
+            int excess = result.scale - 30;
+            result.magnitude = result.magnitude.substring(0, result.magnitude.length() - excess);
+            result.scale = 30;
+        }
+        while (result.scale >0 && result.magnitude.endsWith("0")) {
+            result.magnitude = result.magnitude.substring(0, result.magnitude.length() - 1);
+            result.scale-- ;
+        }
 
         return result;
     }
@@ -229,13 +240,24 @@ public class AFloat {
         AInteger mulResult = a1.multiply(a2);
 
         // Convert the result back to AFloat
-        String addResultMag = mulResult.getMagnitude();
+        String mulResultMag = mulResult.getMagnitude();
        
 
         AFloat result = new AFloat();
-        result.magnitude = addResultMag;
+        result.magnitude = mulResultMag;
         result.sign = mulResult.getSign();
         result.scale = totalScale;
+
+        if (result.scale > 30) {
+            // Truncate the magnitude to 30 decimal places
+            int excess = result.scale - 30;
+            result.magnitude = result.magnitude.substring(0, result.magnitude.length() - excess);
+            result.scale = 30;
+        }
+        while (result.scale >0 && result.magnitude.endsWith("0")) {
+            result.magnitude = result.magnitude.substring(0, result.magnitude.length() - 1);
+            result.scale-- ;
+        }
 
         return result;
 

@@ -302,7 +302,7 @@ public class AInteger {
                 int digit2 = mag2.charAt(j) - '0';
 
                 int product = digit1*digit2;
-                int pos2 = i + j +1;
+                int pos2 = i + j + 1;
                 int pos1 = i+j;
 
                 int sum = product + mul[pos2];
